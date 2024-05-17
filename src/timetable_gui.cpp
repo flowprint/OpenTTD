@@ -561,25 +561,25 @@ struct TimetableWindow : Window {
 	{
 		const Vehicle *v = this->vehicle;
 		Rect tr = r.Shrink(WidgetDimensions::scaled.framerect);
-		TimerGameTick::Ticks preci;
+		TimerGameTick::Ticks precision;
 		switch (_settings_client.gui.timetable_mode) {
-			case TimetableMode::Days :
-				preci = Ticks::DAY_TICKS;
+			case TimetableMode::Days:
+				precision = Ticks::DAY_TICKS;
 				break;
-			case TimetableMode::Seconds :
-				preci = Ticks::TICKS_PER_SECOND;
+			case TimetableMode::Seconds:
+				precision = Ticks::TICKS_PER_SECOND;
 				break;
-			case TimetableMode::Ticks :
-				preci = 1;
+			case TimetableMode::Ticks:
+				precision = 1;
 				break;
 		}
 
 		TimerGameTick::Ticks total_time = v->orders != nullptr ? v->orders->GetTimetableDurationIncomplete() : 0;
 		if (total_time != 0) {
 			SetTimetableParams(0, 1, total_time);
-			if (!(v->orders->IsCompleteTimetable())) {
+			if (!v->orders->IsCompleteTimetable()) {
 				DrawString(tr, STR_TIMETABLE_TOTAL_TIME_INCOMPLETE);
-			} else if (total_time % preci == 0) {
+			} else if (total_time % precision == 0) {
 				DrawString(tr, STR_TIMETABLE_TOTAL_TIME);
 			} else {
 				DrawString(tr, STR_TIMETABLE_APPROX_TIME);
