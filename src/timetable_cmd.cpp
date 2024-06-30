@@ -530,7 +530,7 @@ void UpdateVehicleTimetable(Vehicle *v, bool travelling)
 		 * processing of different orders when filling the timetable. */
 		uint factor = _settings_client.gui.timetable_mode == TimetableMode::Days ? Ticks::DAY_TICKS : Ticks::TICKS_PER_SECOND;
 		uint time_to_set = CeilDiv(std::max(time_taken, 1), factor) * factor;
-		
+
 		if (travelling && (autofilling || !real_current_order->IsTravelTimetabled())) {
 			ChangeTimetable(v, v->cur_real_order_index, time_to_set, MTF_TRAVEL_TIME, autofilling);
 		} else if (!travelling && (autofilling || !real_current_order->IsWaitTimetabled())) {
